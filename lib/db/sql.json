@@ -1,0 +1,3 @@
+{
+  "getUserByMail": "select id, name, mail, status_id, phone, second_factor, activation_key, address, identity_id, identity_type, country_code from user_account u where u.mail = $1;"
+}
