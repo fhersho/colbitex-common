@@ -1,12 +1,14 @@
 'use strict'
 
-const assert = require('assert')
+const test = require('ava')
 const DB = require('../../lib/db/db')
 
 const db = new DB()
 
-describe('Conexión a la BD', () => {
-  it('deberia existir la conexión', () => {
-    assert.ok(db.connected)
+test('Conexión a la BD', async t => {
+  await db.connect().then(res => {},
+  err => {
+    t.fail('Ocurrio un error al momento de realizar la Conexión a la BD: ' + err)
   })
+  t.true(db.connected, 'Deberia existir conexion a la BD')
 })

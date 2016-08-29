@@ -1,33 +1,26 @@
 'use strict'
 
-const assert = require('assert')
+const test = require('ava')
 const UserManager = require('../../lib/db/user-manager')
 
 const userManager = new UserManager()
 
-describe('UserManager', () => {
-  describe('getUserByMail', () => {
-    it('No se deben encontrar registros, la lista debe ser vacia', (done) => {
-      userManager.getUserByMail('xxxxxx', (err, res) => {
-        if(err) return done(err)
+test('getUserByMail', async t => {
+  await userManager.getUserByMail('xxxxxx').then(res => {
+    t.not(res, null, 'la resuesta no debe ser null')
 
-        if(res == null) return done(new Error('La respuesta es null'))
+    t.is(res.length, 0, 'la lista debe ser vacia')
+  }, err => {
+    t.fail('Ocurrio un error: ' + err)
+  })
+})
 
-        if(res.length === 0) return done()
-      })
-    })
+test('getUserByMail', async t => {
+  await userManager.getUserByMail('fhersho@gmail.com').then(res => {
+    t.not(res, null, 'la resuesta no debe ser null')
 
-    it('Se deben encontrar registros', (done) => {
-      userManager.getUserByMail('fhersho@gmail.com', (err, res) => {
-        if(err) return done(err)
-
-        if(res == null) return done(new Error('La respuesta es null'))
-
-        if(res.length === 0) return done(new Error('No se encontraron registros'))
-
-        if(res.length > 0) return done(null, 'aja') 
-      })
-    })
-
+    t.not(res.length, 0, 'la lista no debe ser vacia')
+  }, err => {
+    t.fail('Ocurrio un error: ' + err)
   })
 })

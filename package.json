@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "standard",
-    "test": "npm run lint && mocha test --reporter spec --recursive"
+    "test": "npm run lint && ava"
   },
   "author": "Fernando Padilla",
   "license": "ISC",
@@ -14,13 +14,14 @@
     "pg": "^6.1.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.0.2",
-    "standard": "^8.0.0"
+    "ava": "^0.16.0",
+    "standard": "^8.0.0",
+    "babel-eslint": "^6.1.2"
   },
   "standard": {
+    "parser": "babel-eslint",
     "ignore": [
-      "test"
+      "test2"
     ]
-  } 
+  }
 }
