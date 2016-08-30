@@ -1,3 +1,4 @@
 {
-  "getUserByMail": "select id, name, mail, status_id, phone, second_factor, activation_key, address, identity_id, identity_type, country_code from user_account u where u.mail = $1;"
+  "getUserByMail": "select id, name, mail, status_id, phone, second_factor, activation_key, address, identity_id, identity_type, country_code from user_account u where u.mail = $1;",
+  "getUserById":"select u.id,  u.name,  u.mail,  u.status_id as \"idStatus\",  u.phone,  u.salt,  u.second_factor as \"secondFactor\",  u.activation_key as \"activationKey\",  u.fee_limit as \"feeLimit\",  u.fee_market as \"feeMarket\",  c.name as \"countryName\",  c.id as \"countryId\",  u.identity_id as \"identityId\",  it.id as \"identityTypeId\",  it.name as \"identityTypeName\",  u.address,  u.lang,              u.birth_date as \"birthDate\",  u.second_factor_key as \"secondFactorKEY\",  u.second_factor_url_qr as \"secondFactorUrlQR\", u.withdrawal_fiat_fee as \"withdrawalFiatFee\" from user_account u left join identity_type it on (u.identity_type = it.id) left join country c on (u.country_code = c.id) where u.id = $1;"
 }
